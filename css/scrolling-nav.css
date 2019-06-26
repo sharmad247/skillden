@@ -34,7 +34,7 @@ h4 {
 }
 
 .bg-dark {
-  background: rgb(22, 22, 22) !important;
+  background: linear-gradient(to right, rgb(27, 0, 77) 9%,#1D0454 24%, #2D035B, #4e025a 92%);
 }
 
 .btn-primary {
@@ -113,3 +113,8 @@ h4 {
 .subscribe {
   display: inline !important;
 }
+
+.navbar {
+  z-index: 99999;
+}
+
