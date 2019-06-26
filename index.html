@@ -148,24 +148,43 @@
   <script src="js/scrolling-nav.js"></script>
 
   <script>
-    $('.counter').each(function() {
-    var $this = $(this),
-        countTo = $this.attr('data-count');
-    
-    $({ countNum: $this.text()}).animate({
-      countNum: countTo
-    },
-    {
-      duration: 1000,
-      easing:'linear',
-      step: function() {
-        $this.text(Math.floor(this.countNum)+'+');
-      },
-      complete: function() {
-        $this.text(this.countNum+'+');
+    var counter = document.querySelector('.counter');
+    var flag = true
+    var isInViewport = function (elem) {
+      var bounding = elem.getBoundingClientRect();
+      return (
+          bounding.top >= 10 &&
+          bounding.left >= 0 &&
+          bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+
+    window.addEventListener('scroll', function (event) {
+      if (isInViewport(counter) && flag) {
+        flag = false
+        $('.counter').each(function() {
+        var $this = $(this),
+            countTo = $this.attr('data-count');
+        
+        $({ countNum: $this.text()}).animate({
+          countNum: countTo
+        },
+        {
+          duration: 1000,
+          easing:'linear',
+          step: function() {
+            $this.text(Math.floor(this.countNum)+'+');
+          },
+          complete: function() {
+            $this.text(this.countNum+'+');
+          }
+        });  
+      });
       }
-    });  
-  });
+    }, false);
+
+
   </script>
 </body>
 </html>
