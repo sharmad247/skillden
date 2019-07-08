@@ -92,8 +92,8 @@
   <section id="subscribe" class="bg-light">
       <div class="container text-center">
         <div class="row mx-auto">
-            <div class="col-lg-10 mx-auto">
-              <h3>Don't miss out!</h3>
+            <div  class="col-lg-8 mx-auto">
+              <h3 id="subscriptionCall">Don't miss out!</h3>
             </div>
           </div>
           <br>
@@ -204,8 +204,29 @@
       });
       }
     }, false);
+  </script>
+  <script>
+  
+  var handleSubmit = () => {
 
 
+    var email = document.getElementById("mailid").value
+
+    fetch('https://app.mailerlite.com/webforms/submit/h1b2t7?fields%5Bemail%5D=' + email +'&ml-submit=1&ajax=1&guid=294efc8c-1a4c-01da-a2dd-fdd2309728c1&_=1561554406070')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(JSON.stringify(myJson));
+
+    var form = document.getElementById("subscription") ;
+    form.remove()
+
+    var suc_text = document.getElementById("subscriptionCall");
+    suc_text.textContent = "Thanks for Subscribing!";
+  });
+  }
+  
   </script>
 </body>
 </html>
